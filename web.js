@@ -2,11 +2,13 @@ var express = require('express');
 
 var app = express.createServer(express.logger());
 
-var fs = require('fs');
+var fs = require('fs'); // Seems to me that there's no need to declare a variable here
+
+var buf = new Buffer(32);
 
 app.get('/', function(request, response) {
-  fs.readFileSync("index.html");
-  response.send('Hello World4!');
+  buf = fs.readFileSync("index.html");
+  console.log(buf.toString('utf8'));
 });
 
 var port = process.env.PORT || 5000;
